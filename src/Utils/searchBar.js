@@ -19,7 +19,7 @@ class searchBar extends Component {
                 className="form-control"
                 placeholder={this.props.placeholder}
                 value={this.state.term}
-                onChange={e => this.onInputChange(e.target. value)}
+                onChange={e => this.onInputChange(e.target.value)}
             />
         )
     }
@@ -30,8 +30,8 @@ class searchBar extends Component {
     
     */
 
-    onInputChange(term){
-        this.setState({term});
+    onInputChange(term) {
+        this.setState({ term });
         this.props.onSearchTermChange(term);
     }
 }

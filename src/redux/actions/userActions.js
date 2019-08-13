@@ -17,7 +17,10 @@ export const loadUsers = (term = '') => {
                 ต้องส่ง heder ชื่อ authorization โดยส่ง token เข้าไป
                 เพื่อบอกให้ server รู้ว่าเราได้ signin ถูกต้องแล้ว
             */
-           headers:{authorization:localStorage.getItem('token')}
+           headers:{
+               authorization:localStorage.getItem('token'),
+               'Access-Control-Allow-Origin': '*'
+            }
         }).then(results =>{
             /* 
                 เมื่อข้อมูลส่งกลับมาก็สั่ง dispatch ให้ reducer รู้พร้อมส่ง payload เนื่องจากเราใช้ axios แทน fetch ดังนั้นข้อมูลที่ส่งมาจะอยู่ใน object ชื่อ data
@@ -39,7 +42,10 @@ export const getUser = (id) => {
             /* 
                 ต้องส่ง headers ชื่อ authorization โดยส่ง token เข้าไปเพื่อบอกให้ server รู้ว่าเราได้ signin ถูกต้องแล้ว
             */
-           headers:{authorization:localStorage.getItem('token')}
+           headers:{
+               authorization:localStorage.getItem('token'),
+               'Access-Control-Allow-Origin': '*'
+            }
         }).then(results =>{
             /*  
                 เมื่อข้อมูลส่งกลับมาก็สั่ง dispatch ให้ reducer รู้พร้อมส่ง payload 
@@ -77,7 +83,9 @@ export const saveUser = (values) => {
           method:_method,
           url: `${BASE_URL}/users/${_id}`,
           data:values,
-          headers:{authorization: localStorage.getItem('token')}
+          headers:{
+              authorization: localStorage.getItem('token'),'Access-Control-Allow-Origin': '*'
+            }
       }).then(results => {
           /* 
             เมื่อข้อมูลส่งกลับมาต้องเช็คสถานะก่อนว่า username ซ้ำหรือไม่โดย server จะส่ง object ที่ชื่อว่า status และ message กลับา
@@ -103,7 +111,10 @@ export const deleteUser = (id) => {
             /*
                 ต้องส่ง header ชื่อ authorixation โดยส่ง token เข้าไปด้วย
             */
-           headers:{authorization: localStorage.getItem('token')}
+           headers:{
+               authorization: localStorage.getItem('token'),
+               'Access-Control-Allow-Origin': '*'
+            }
         }).then(results => {
             // ลบข้อมูลสำเร็จ
             dispatch({type:'DELETE_USER_SUCCESS'})
