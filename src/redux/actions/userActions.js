@@ -18,8 +18,10 @@ export const loadUsers = (term = '') => {
                 เพื่อบอกให้ server รู้ว่าเราได้ signin ถูกต้องแล้ว
             */
            headers:{
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
                authorization:localStorage.getItem('token'),
-               'Access-Control-Allow-Origin': '*'
+               
             }
         }).then(results =>{
             /* 
@@ -43,8 +45,9 @@ export const getUser = (id) => {
                 ต้องส่ง headers ชื่อ authorization โดยส่ง token เข้าไปเพื่อบอกให้ server รู้ว่าเราได้ signin ถูกต้องแล้ว
             */
            headers:{
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
                authorization:localStorage.getItem('token'),
-               'Access-Control-Allow-Origin': '*'
             }
         }).then(results =>{
             /*  
@@ -84,7 +87,9 @@ export const saveUser = (values) => {
           url: `${BASE_URL}/users/${_id}`,
           data:values,
           headers:{
-              authorization: localStorage.getItem('token'),'Access-Control-Allow-Origin': '*'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+              authorization: localStorage.getItem('token')
             }
       }).then(results => {
           /* 
@@ -112,8 +117,9 @@ export const deleteUser = (id) => {
                 ต้องส่ง header ชื่อ authorixation โดยส่ง token เข้าไปด้วย
             */
            headers:{
-               authorization: localStorage.getItem('token'),
-               'Access-Control-Allow-Origin': '*'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+               authorization: localStorage.getItem('token')
             }
         }).then(results => {
             // ลบข้อมูลสำเร็จ
