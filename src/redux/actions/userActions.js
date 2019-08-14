@@ -21,7 +21,7 @@ export const loadUsers = (term = '') => {
           
            headers:{
             'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json;charset=UTF-8',
             authorization:localStorage.getItem('token')
             }
         }).then(results =>{
@@ -48,7 +48,7 @@ export const getUser = (id) => {
             */
            headers:{
             'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json;charset=UTF-8',
                authorization:localStorage.getItem('token'),
             }
         }).then(results =>{
@@ -90,7 +90,7 @@ export const saveUser = (values) => {
           data:values,
           headers:{
             'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json;charset=UTF-8',
               authorization: localStorage.getItem('token')
             }
       }).then(results => {
@@ -120,7 +120,7 @@ export const deleteUser = (id) => {
             */
            headers:{
             'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json;charset=UTF-8',
                authorization: localStorage.getItem('token')
             }
         }).then(results => {
