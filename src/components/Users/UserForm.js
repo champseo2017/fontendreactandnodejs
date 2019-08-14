@@ -50,7 +50,7 @@ class UserForm extends Component {
                                     <Field
                                         className="form-check-input"
                                         name="user_type"
-                                        Component="input"
+                                        component="input"
                                         type="radio"
                                         value='0'
                                     />{''}

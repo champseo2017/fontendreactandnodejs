@@ -16,14 +16,16 @@ export const loadUsers = (term = '') => {
             /* 
                 ต้องส่ง heder ชื่อ authorization โดยส่ง token เข้าไป
                 เพื่อบอกให้ server รู้ว่าเราได้ signin ถูกต้องแล้ว
+                Access-Control-Allow-Origin': '*'
             */
+          
            headers:{
-            'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
-               authorization:localStorage.getItem('token'),
-               
+            'Content-Type': 'application/json',
+            authorization:localStorage.getItem('token')
             }
         }).then(results =>{
+            
             /* 
                 เมื่อข้อมูลส่งกลับมาก็สั่ง dispatch ให้ reducer รู้พร้อมส่ง payload เนื่องจากเราใช้ axios แทน fetch ดังนั้นข้อมูลที่ส่งมาจะอยู่ใน object ชื่อ data
                 ที่มี array อยู่ข้างใน ดังนั้นนำไป data.map ได้เลย
@@ -45,8 +47,8 @@ export const getUser = (id) => {
                 ต้องส่ง headers ชื่อ authorization โดยส่ง token เข้าไปเพื่อบอกให้ server รู้ว่าเราได้ signin ถูกต้องแล้ว
             */
            headers:{
-            'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
                authorization:localStorage.getItem('token'),
             }
         }).then(results =>{
@@ -87,8 +89,8 @@ export const saveUser = (values) => {
           url: `${BASE_URL}/users/${_id}`,
           data:values,
           headers:{
-            'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
               authorization: localStorage.getItem('token')
             }
       }).then(results => {
@@ -117,8 +119,8 @@ export const deleteUser = (id) => {
                 ต้องส่ง header ชื่อ authorixation โดยส่ง token เข้าไปด้วย
             */
            headers:{
-            'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
                authorization: localStorage.getItem('token')
             }
         }).then(results => {
