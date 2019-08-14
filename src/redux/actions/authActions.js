@@ -12,7 +12,11 @@ export const signin = ({ username, password }) => {
     return axios({
       method: "post",
       url: `${BASE_URL}/signin`,
-      data: { username, password }
+      data: { username, password },
+      headers:{
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json;charset=UTF-8',
+      }
     })
       .then(response => {
         /* 
