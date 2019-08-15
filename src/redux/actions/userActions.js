@@ -74,11 +74,13 @@ export const saveUser = (values) => {
         post จะไป match กับ route ฝั่ง server คือ app.post('/users', requireAuth, users.create)
     */
    let _id = ''
+   
    let _method = 'post'
-   if(values._id){
-       _id = values._id
+   if(values.id){
+       _id = values.id
        _method = 'put'
    }
+   console.log(_id);
    return (dispatch) => {
        /* 
         รูปแบบการใช้ axios อีกรูปแบบในการจะระบุ method ที่ต้องการ
