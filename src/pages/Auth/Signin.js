@@ -12,6 +12,12 @@ class Signin extends Component {
     return (
       <div className="row">
         <div className="col-6 mx-auto">
+          <div>
+            <h2>สามารถทดสอบระบบได้</h2>
+            <h3>User เข้าสู่ระบบ</h3>
+            <h4>User: admin</h4>
+            <h4>Password: 1234</h4>
+          </div>
           <div className="card mb-3">
             <h4 className="card-header">เข้าสู่ระบบ</h4>
             <div className="card-body">
