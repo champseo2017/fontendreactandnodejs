@@ -77,6 +77,7 @@ export const saveLocation = (values) => {
        _id = values.id
        _method = 'put' 
    }
+   
    return (dispatch) => {
        /*   
         รูปแบบการใช้ axios อีกรูปแบบในการจะระบุ method ที่ต้องการต้องส่ง header ชื่อ authorization โดยส่ง token เข้าไปด้วย
@@ -85,11 +86,12 @@ export const saveLocation = (values) => {
           method:_method,
           url:`${BASE_URL}/locations/${_id}`,
           data:values,
-          header:{
+          headers:{
             'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json;charset=UTF-8',
-              authorization:localStorage.getItem('token')
+            authorization:localStorage.getItem('token')
           }
+          
       }).then(results => {
           /* 
             เมื่อข้อมูลส่งกลับมาต้องเช็คสถานะก่อนว่า code ซ้ำหรือไม่โดย server จะส่ง object ที่ชื่อว่า status และ message กลับมา

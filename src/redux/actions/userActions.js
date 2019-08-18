@@ -80,7 +80,7 @@ export const saveUser = (values) => {
        _id = values.id
        _method = 'put'
    }
-   console.log(_id);
+  
    return (dispatch) => {
        /* 
         รูปแบบการใช้ axios อีกรูปแบบในการจะระบุ method ที่ต้องการ

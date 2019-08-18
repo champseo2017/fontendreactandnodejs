@@ -65,11 +65,80 @@ class Location extends Component {
                 {/*
                     เป็น Component สำหรับแสดง Modal ของ reactstrap
                     ซึ้งเราต้องควบคุมการแสดงไว้ที่ไฟล์นี้ ถ้าทำแยกไฟล์จะควบคุมยาก
-                
                 */}
+                <Modal isOpen={this.state.modal} toggle={this.toggle}               className="modal-primary" autoFocus={false}>
+                    <ModalHeader toggle={this.toggle}>{this.state.modalTitle}สถานที่</ModalHeader>
+                    {/* เรียกใช้งาน Component LocationForm และส่ง props ไปด้วย 4 ตัว */}
+                    <LocationForm
+                        data={location.data}
+                        locationSave={locationSave}
+                        onSubmit={this.handleSubmit}
+                        onToggle={this.toggle}/>
+                </Modal>
             </div>
         )
     }
+    // ฟังก์ชั่นแสดงการเปิดปิด modal
+    toggle = () => {
+        this.setState({
+            modal: !this.state.modal
+        })
+    }
+
+    // ฟังก์ชั่น filter ข้อมูล
+    handleSearch = (term) => {
+        this.props.dispatch(loadLocations(term))
+    }
+
+    // ฟังก์ชั่นสร้างข้อมูลใหม่โดยจะสั่งให้เปิด MOdal
+    handleNew = () => {
+        this.props.dispatch(resetStatus())
+        this.props.location.data = []
+        this.setState({modalTitle:'เพิ่ม'})
+        this.toggle();
+    }
+
+    // ฟังก์ชั่นแก้ไขข้อมูล และสั่งให้ปิด Modal โดยส่งข้อมูลไปแป๊ะให้กับฟอร์มด้วย
+    handleEdit = (id) => {
+        this.props.dispatch(resetStatus())
+        this.setState({modalTitle:'แก้ไข'})
+        this.props.dispatch(getLocation(id)).then(()=>{
+            this.toggle()
+        })
+    }
+
+    // ฟังก์ชั่นบันทึกข้อมูล
+    handleSubmit = (values) => {
+        
+        this.props.dispatch(saveLocation(values)).then(()=>{
+            if(!this.props.locationSave.isRejected){
+                this.toggle()
+                this.props.dispatch(loadLocations())
+            }
+        })
+    }
+
+    // ฟังก์ชั่นลบข้อมูล
+    handleDelete = (id) => {
+        confirmModalDialog({
+            show:true,
+            title:'ยืนยันการลบ',
+            message:'คุณต้องการลบข้อมูลนี้ใช้หรือไม่',
+            confirmLabel:'ยืนยัน ลบทันที',
+            onConfirm: () => this.props.dispatch(deleteLocation(id)).then(()=>{
+                this.props.dispatch(loadLocations())
+            })
+        })
+    }
 }
 
-export default Location
+function mapStateToProps(state) {
+    return {
+        locations:state.locationReducers.locations,
+        location:state.locationReducers.location,
+        locationDelete:state.locationReducers.locationDelete,
+        locationSave:state.locationReducers.locationSave
+    }
+}
+
+export default connect(mapStateToProps)(Location)
