@@ -32,6 +32,7 @@ class Location extends Component {
     render() {
         const {locations, location, locationSave} = this.props
         // ถ้ามี error
+        
         if(locations.isRejected){
             return <div>{locations.data}</div>
         }

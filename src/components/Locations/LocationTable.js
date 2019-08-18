@@ -6,6 +6,7 @@ class LocationTable extends Component {
     render() {
         // Destructuring ค่า props ที่ส่งมาจาก src/pages/Location.js
         const {data, buttonNew, buttonEdit, buttonDelete} = this.props
+        
         return (
            <Table striped bordered hover>
                <thead>
