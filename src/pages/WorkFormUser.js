@@ -43,12 +43,68 @@ class WorkFormUser extends Component {
         if(work.isLoading){
             return <div>Loading...</div>
         }
+
+        // แปลงวันที่และเวลาเป็นรูปแบบที่ต้องการไว้ครับ
+        const datetime = (data) ? `${moment(data.doc_date).format('YYYY-MM-DD')} ${data.doc_time} ` : ''
+
+        // กำหนดส่วนหัวหน้าจอ โดยเช็คว่าถ้า data มีข้อมูลแสดงว่าเป็นการแก้ไขรายการ
+        const caption = (data) ? 'แก้ไขรายการแจ้งซ่อม':'เพิ่มรายการแจ้งซ่อม'
         return (
             <div>
-                
+                <h4>{caption}</h4>
+                <form>
+                    <div className="form-group row">
+                        <label className="col-sm-3 col-form-label">วันที่แจ้ง</label>
+                        <div className="col-sm-9">
+                            <input type="text" readOnly className="form-control-plaintext" value={datetime}/>
+                        </div>
+                    </div>
+                    <Field name="location_id" component={renderLocation} label="สถานที่"/>
+                    <Field name="detail" component={renderField} label="ปัญหา" textarea/>
+                    <Field name="phone" component={renderField} label="โทรศัพท์ติดต่อ"/>
+                    <hr/>
+                    <Button color="primary" onClick={handleSubmit(this.onSubmit)}>บันทึก</Button>{''}
+                    <Button color="secondary" onClick={browserHistory.goBack}>ยกเลิก</Button>
+                </form>
             </div>
         )
     }
+
+    // ฟังก์ชั่นบันทึกข้อมูล
+    onSubmit = (values) => {
+        // เมื่อบันทึกข้อมูลเสร็จสั่งให้ไปยัง route/work
+        this.props.dispatch(saveWork(values)).then(()=>{
+            browserHistory.push('/work')
+        })
+    }
 }
 
-export default WorkFormUser
+// validate ข้อมูลจุดสำคัญคือ values.location_id
+    // เพราะการ validate deopdown ต้องทำข้อมูลหลอกไว้ก่อน
+    function validate(values){
+        const errors = {};
+        if(values.location_id === "select"){
+            errors.location_id = 'ต้องเลือกสถานที่';
+        }
+        if(!values.detail){
+            errors.detail = 'จำเป็นต้องกรอกรายละเอียด';
+        }
+        if(!values.phone){
+            errors.phone = 'จำเป็นต้องกรอกโทรศัพท์';
+        }
+        return errors;
+    }
+
+    const form = reduxForm({
+        form:'workUser',
+        validate
+    })
+
+    function mapStateToProps(state){
+        return {
+            work: state.workReducers.work
+        }
+    }
+
+
+export default connect(mapStateToProps)(form(WorkFormUser))
