@@ -50,13 +50,12 @@ class WorkTable extends Component {
                             statusText = 'กำลังดำเนินการ'
                         }else if(e.status === 2){
                             statusText = 'ซ่อมเสร็จ'
-                        }else{
-                            statusText
                         }
                         return (
                             <tr key={e.id}>
                                 {/* ส่วนนี้ใช้ moment เพื่อแปลงวันที่ให้เป็นรูปแบบที่ต้องการ */}
                                 <td e="text-center">{moment(e.doc_date).format('YYYY-MM-DD')}{e.doc_time}</td>
+                                <td>{e.detail}</td>
                                 <td className="text-center">{statusText}</td>
                                 <td>{e.location_name}</td>
                                 <td className="text-center">

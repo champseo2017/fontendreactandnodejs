@@ -72,6 +72,7 @@ class WorkFormUser extends Component {
 
     // ฟังก์ชั่นบันทึกข้อมูล
     onSubmit = (values) => {
+       
         // เมื่อบันทึกข้อมูลเสร็จสั่งให้ไปยัง route/work
         this.props.dispatch(saveWork(values)).then(()=>{
             browserHistory.push('/work')

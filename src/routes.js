@@ -8,6 +8,9 @@ import Signin from './pages/Auth/Signin'
 import Signout from './pages/Auth/Signout'
 import RequireAuth from './pages/Auth/Authentication'
 import RequireAuthAdmin from './pages/Auth/AuthenticationAdmin'
+import WorkFormUser from './pages/WorkFormUser'
+import WorkDetail from './pages/WorkDetail'
+import WorkFormRepair from './pages/WorkFormRepair'
 
 const routes = [{
     path: '/',
@@ -16,8 +19,12 @@ const routes = [{
     childRoutes: [
         {path:'signin', component: Signin},
         {path:'signout', component: Signout},
-        { path: 'work', component: RequireAuth(Work) },
-        { path: 'workrepair', component: RequireAuth(RequireAuthAdmin(WorkRepair)) },
+        {path: 'work', component: RequireAuth(Work) },
+        {path:'work/new', component:RequireAuth(WorkFormUser)},
+        {path:'work/update/:id', component:RequireAuth(WorkFormUser)},
+        {path:'work/detail/:id', component: RequireAuth(WorkDetail)},
+        {path: 'workrepair', component: RequireAuth(RequireAuthAdmin(WorkRepair)) },
+        {path:'work/repair/:id', component:RequireAuth(RequireAuthAdmin(WorkFormRepair))},
         { path: 'user', component: RequireAuth(RequireAuthAdmin(User)) },
         { path: 'location', component: RequireAuth(RequireAuthAdmin(Location)) }
     ]

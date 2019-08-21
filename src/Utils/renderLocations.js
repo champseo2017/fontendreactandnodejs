@@ -17,7 +17,7 @@ export class renderLocations extends Component {
                 <label className="col-sm-3 col-form-label">{label}</label>
                 <div className="col-sm-6">
                     <select {...input} className="form-control">
-                        <option value="foo" disabled>===เลือกสถานที่===</option>
+                        <option value="select" disabled>===เลือกสถานที่===</option>
                         {locations.data && locations.data.map(e=>{
                             return (
                         <option key={e.id} value={e.id}>{e.code}@{e.name}</option>
